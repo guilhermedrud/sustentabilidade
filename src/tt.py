@@ -114,17 +114,18 @@ for f1 in all_features:
     i = i + 1
     j = 0
     for f2 in all_features:
-         if f2 in f: continue
-         j = j + 1
-         f.insert(len(f), f2)
-         A,B,C = eval_bootstrap(df, f, md)
-         print("%s,%f,%f,%f" % (f,A,B,C))
-         z = A
-         f.remove(f2)
-         sys.stdout.flush()
-         if z < k:
-             x = f2
-             k = z
+        if f2 in f:
+            continue
+        j = j + 1
+        f.insert(len(f), f2)
+        A,B,C = eval_bootstrap(df, f, md)
+        print("%s,%f,%f,%f" % (f,A,B,C))
+        z = A
+        f.remove(f2)
+        sys.stdout.flush()
+        if z < k:
+            x = f2
+            k = z
     f.insert(len(f), x)
     if i > 2:
         v,f = back_one(df, f, md)

@@ -18,11 +18,12 @@ from sklearn.linear_model import LinearRegression
 from sklearn.neural_network import MLPRegressor
 from sklearn.svm import SVR
 from sklearn.linear_model import Lasso
+import lightgbm as lgb
 
 
 # Parameters
-LABEL_COLUMN_NAME = 'finalGrade'
-UNWANTED_COLUMNS = ['filename','understandingGrade','selectinginfoGrade','showknowGrade','solutionGrade','formalGrade']
+LABEL_COLUMN_NAME = '7444'
+UNWANTED_COLUMNS = ['empresa']
 
 N_FOLDS = 5
 RANDOM_STATE = 1
@@ -48,6 +49,7 @@ def eval_bootstrap(df, features, md):
             elif md == 4: regressor = MLPRegressor(hidden_layer_sizes=(20,30,30,5,), batch_size = 10, activation='relu', random_state = RANDOM_STATE)
             elif md == 5: regressor = LinearRegression()
             elif md == 6: regressor = Lasso(alpha=0.1, random_state = RANDOM_STATE)
+            elif md == 7: regressor = lgb.LGBMRegressor()
 
             regressor = regressor.fit(X[train], y[train])
             pred = regressor.predict(X[val])
